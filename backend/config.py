@@ -12,7 +12,7 @@ OUTPUT_DIR = STORAGE_DIR / "output"
 
 REPLICATE_API_TOKEN = os.getenv("REPLICATE_API_TOKEN", "")
 REPLICATE_MODEL = "minimax/video-01"
-FFMPEG_PATH = r"C:\ffmpeg\ffmpeg-8.0.1-essentials_build\bin\ffmpeg.exe"
+FFMPEG_PATH = os.getenv("FFMPEG_PATH", "ffmpeg")
 
 VIDEO_DURATION = 10.0
 VIDEO_WIDTH = 1280
