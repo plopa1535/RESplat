@@ -7,8 +7,6 @@ from services.compositor import (
     trim_clip,
     normalize_clip,
     concatenate_clips,
-    generate_srt,
-    burn_subtitles,
 )
 
 
@@ -73,21 +71,12 @@ async def run_pipeline(
             concat_output = job_output_dir / "concat.mp4"
             await concatenate_clips(processed_paths, concat_output)
 
-        update_job_status(job_id, "burning_subtitles", 90, "Adding subtitles...")
-
-        subtitles = [s.subtitle for s in scenes]
-        srt_path = job_output_dir / "subtitles.srt"
-        generate_srt(subtitles, srt_path)
-
-        final_output = job_output_dir / "final.mp4"
-        await burn_subtitles(concat_output, srt_path, final_output)
-
         update_job_status(
             job_id,
             "completed",
             100,
             "Done!",
-            output_path=str(final_output),
+            output_path=str(concat_output),
         )
 
     except Exception as e:
