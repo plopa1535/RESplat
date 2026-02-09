@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(where:*)",
+      "Bash(node --version:*)",
+      "Bash(ffmpeg:*)",
+      "Bash(npm --version:*)",
+      "Bash(pip --version:*)",
+      "Bash(npx create-next-app@latest:*)",
+      "Bash(npm install:*)",
+      "Bash(python:*)",
+      "Bash(\"C:\\\\Users\\\\CHECK\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python311\\\\python.exe\" -m pip install -r requirements.txt)",
+      "Bash(npx next build:*)",
+      "Bash(powershell -Command \"[Environment]::GetEnvironmentVariable\\('Path', 'User'\\)\":*)",
+      "Bash(powershell -Command:*)",
+      "Bash(export PATH=\"$PATH:/c/ffmpeg/ffmpeg-8.0.1-essentials_build/bin\")",
+      "Bash(\"C:/ffmpeg/ffmpeg-8.0.1-essentials_build/bin/ffmpeg.exe\" -version)",
+      "WebFetch(domain:replicate.com)",
+      "Bash(curl:*)",
+      "Bash(taskkill:*)",
+      "Bash(pkill:*)",
+      "Bash(powershell -NoProfile -Command \"Stop-Process -Name python -Force -ErrorAction SilentlyContinue; Write-Output done\")",
+      "WebFetch(domain:fal.ai)",
+      "WebFetch(domain:wavespeed.ai)",
+      "Bash(tasklist:*)",
+      "Bash(findstr:*)",
+      "Bash(cmd /c \"taskkill /F /PID 38560 & taskkill /F /PID 28912 & taskkill /F /PID 37860 & taskkill /F /PID 37384\")",
+      "Bash(timeout:*)",
+      "Bash(cmd /c:*)",
+      "Bash(git remote add:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}
