@@ -25,19 +25,28 @@ def _get_client() -> Groq:
 
 
 def _encode_image(image_path: Path) -> tuple[str, str]:
-    """Read image and return (base64_data, mime_type)."""
-    data = image_path.read_bytes()
+    """Read image, resize if large, compress, and return (base64_data, mime_type)."""
+    from PIL import Image
+    import io
+
+    img = Image.open(image_path)
+
+    # Convert RGBA to RGB for JPEG
+    if img.mode in ("RGBA", "P"):
+        img = img.convert("RGB")
+
+    # Resize if too large (max 1024px on longest side)
+    max_size = 1024
+    if max(img.size) > max_size:
+        img.thumbnail((max_size, max_size), Image.LANCZOS)
+
+    # Compress as JPEG
+    buffer = io.BytesIO()
+    img.save(buffer, format="JPEG", quality=75)
+    data = buffer.getvalue()
+
     b64 = base64.b64encode(data).decode("utf-8")
-    suffix = image_path.suffix.lower()
-    mime_map = {
-        ".jpg": "image/jpeg",
-        ".jpeg": "image/jpeg",
-        ".png": "image/png",
-        ".webp": "image/webp",
-        ".gif": "image/gif",
-    }
-    mime = mime_map.get(suffix, "image/jpeg")
-    return b64, mime
+    return b64, "image/jpeg"
 
 
 async def analyze_images(image_paths: list[Path]) -> str:
