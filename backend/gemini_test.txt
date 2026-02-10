@@ -1,0 +1,170 @@
+﻿python : C:\Users\CHECK\AppData\Local\P
+rograms\Python\Python311\Lib\site-packa
+ges\pydantic\_internal\_fields.py:184: 
+UserWarning: Field name "name" shadows 
+an attribute in parent "Operation"; 
+위치 줄:1 문자:1
++ python -c "from google import genai; 
+c = genai.Client(api_key='AIzaSy ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpeci 
+   fied: (C:\Users\CHECK\...t "Operat  
+  ion"; :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCo 
+   mmandError
+ 
+  warnings.warn(
+C:\Users\CHECK\AppData\Local\Programs\P
+ython\Python311\Lib\site-packages\pydan
+tic\_internal\_fields.py:184: UserWarni
+ng: Field name "metadata" shadows an at
+tribute in parent "Operation"; 
+  warnings.warn(
+C:\Users\CHECK\AppData\Local\Programs\P
+ython\Python311\Lib\site-packages\pydan
+tic\_internal\_fields.py:184: UserWarni
+ng: Field name "done" shadows an attrib
+ute in parent "Operation"; 
+  warnings.warn(
+C:\Users\CHECK\AppData\Local\Programs\P
+ython\Python311\Lib\site-packages\pydan
+tic\_internal\_fields.py:184: UserWarni
+ng: Field name "error" shadows an attri
+bute in parent "Operation"; 
+  warnings.warn(
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "C:\Users\CHECK\AppData\Local\Pr
+ograms\Python\Python311\Lib\site-packag
+es\google\genai\models.py", line 5835, 
+in generate_content
+    response = self._generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CHECK\AppData\Local\Pr
+ograms\Python\Python311\Lib\site-packag
+es\google\genai\models.py", line 4761, 
+in _generate_content
+    response = self._api_client.request
+(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+^
+  File "C:\Users\CHECK\AppData\Local\Pr
+ograms\Python\Python311\Lib\site-packag
+es\google\genai\_api_client.py", line 1
+177, in request
+    response = self._request(http_reque
+st, http_options, stream=False)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CHECK\AppData\Local\Pr
+ograms\Python\Python311\Lib\site-packag
+es\google\genai\_api_client.py", line 9
+97, in _request
+    return self._retry(self._request_on
+ce, http_request, stream)  # type: igno
+re[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CHECK\AppData\Local\Pr
+ograms\Python\Python311\Lib\site-packag
+es\tenacity\__init__.py", line 475, in 
+__call__
+    do = self.iter(retry_state=retry_st
+ate)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^
+  File "C:\Users\CHECK\AppData\Local\Pr
+ograms\Python\Python311\Lib\site-packag
+es\tenacity\__init__.py", line 376, in 
+iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CHECK\AppData\Local\Pr
+ograms\Python\Python311\Lib\site-packag
+es\tenacity\__init__.py", line 418, in 
+exc_check
+    raise retry_exc.reraise()
+          ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CHECK\AppData\Local\Pr
+ograms\Python\Python311\Lib\site-packag
+es\tenacity\__init__.py", line 185, in 
+reraise
+    raise self.last_attempt.result()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CHECK\AppData\Local\Pr
+ograms\Python\Python311\Lib\concurrent\
+futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CHECK\AppData\Local\Pr
+ograms\Python\Python311\Lib\concurrent\
+futures\_base.py", line 401, in __get_r
+esult
+    raise self._exception
+  File "C:\Users\CHECK\AppData\Local\Pr
+ograms\Python\Python311\Lib\site-packag
+es\tenacity\__init__.py", line 478, in 
+__call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CHECK\AppData\Local\Pr
+ograms\Python\Python311\Lib\site-packag
+es\google\genai\_api_client.py", line 9
+74, in _request_once
+    errors.APIError.raise_for_response(
+response)
+  File "C:\Users\CHECK\AppData\Local\Pr
+ograms\Python\Python311\Lib\site-packag
+es\google\genai\errors.py", line 105, i
+n raise_for_response
+    raise ClientError(status_code, resp
+onse_json, response)
+google.genai.errors.ClientError: 429 RE
+SOURCE_EXHAUSTED. {'error': {'code': 42
+9, 'message': 'You exceeded your curren
+t quota, please check your plan and bil
+ling details. For more information on t
+his error, head to: https://ai.google.d
+ev/gemini-api/docs/rate-limits. To moni
+tor your current usage, head to: https:
+//ai.dev/rate-limit. \n* Quota exceeded
+ for metric: generativelanguage.googlea
+pis.com/generate_content_free_tier_requ
+ests, limit: 0, model: gemini-2.0-flash
+\n* Quota exceeded for metric: generati
+velanguage.googleapis.com/generate_cont
+ent_free_tier_requests, limit: 0, model
+: gemini-2.0-flash\n* Quota exceeded fo
+r metric: generativelanguage.googleapis
+.com/generate_content_free_tier_input_t
+oken_count, limit: 0, model: gemini-2.0
+-flash\nPlease retry in 41.54659439s.',
+ 'status': 'RESOURCE_EXHAUSTED', 'detai
+ls': [{'@type': 'type.googleapis.com/go
+ogle.rpc.Help', 'links': [{'description
+': 'Learn more about Gemini API quotas'
+, 'url': 'https://ai.google.dev/gemini-
+api/docs/rate-limits'}]}, {'@type': 'ty
+pe.googleapis.com/google.rpc.QuotaFailu
+re', 'violations': [{'quotaMetric': 'ge
+nerativelanguage.googleapis.com/generat
+e_content_free_tier_requests', 'quotaId
+': 'GenerateRequestsPerDayPerProjectPer
+Model-FreeTier', 'quotaDimensions': {'l
+ocation': 'global', 'model': 'gemini-2.
+0-flash'}}, {'quotaMetric': 'generative
+language.googleapis.com/generate_conten
+t_free_tier_requests', 'quotaId': 'Gene
+rateRequestsPerMinutePerProjectPerModel
+-FreeTier', 'quotaDimensions': {'model'
+: 'gemini-2.0-flash', 'location': 'glob
+al'}}, {'quotaMetric': 'generativelangu
+age.googleapis.com/generate_content_fre
+e_tier_input_token_count', 'quotaId': '
+GenerateContentInputTokensPerModelPerMi
+nute-FreeTier', 'quotaDimensions': {'lo
+cation': 'global', 'model': 'gemini-2.0
+-flash'}}]}, {'@type': 'type.googleapis
+.com/google.rpc.RetryInfo', 'retryDelay
+': '41s'}]}}

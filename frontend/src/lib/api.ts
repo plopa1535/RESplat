@@ -1,4 +1,4 @@
-import type { UploadResponse, JobStatus } from "./types";
+import type { UploadResponse, JobStatus, NarrativeResponse } from "./types";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
@@ -47,4 +47,23 @@ export async function getJobStatus(jobId: string): Promise<JobStatus> {
 
 export function getVideoDownloadUrl(jobId: string): string {
   return `${API_BASE}/api/jobs/${jobId}/video`;
+}
+
+export async function generateNarrative(
+  jobId: string,
+  userNarrative?: string
+): Promise<NarrativeResponse> {
+  const res = await fetch(`${API_BASE}/api/narrative/generate`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      job_id: jobId,
+      user_narrative: userNarrative || null,
+    }),
+  });
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`Narrative generation failed: ${err}`);
+  }
+  return res.json();
 }

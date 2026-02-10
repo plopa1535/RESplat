@@ -20,3 +20,14 @@ class JobStatus(BaseModel):
 class UploadResponse(BaseModel):
     job_id: str
     files: list[str]
+
+
+class NarrativeRequest(BaseModel):
+    job_id: str
+    user_narrative: Optional[str] = None
+
+
+class NarrativeResponse(BaseModel):
+    ai_narrative: str
+    user_narrative: str
+    merged_narrative: str

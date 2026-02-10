@@ -11,6 +11,7 @@ CLIPS_DIR = STORAGE_DIR / "clips"
 OUTPUT_DIR = STORAGE_DIR / "output"
 
 REPLICATE_API_TOKEN = os.getenv("REPLICATE_API_TOKEN", "")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 REPLICATE_MODEL = "minimax/video-01"
 FFMPEG_PATH = os.getenv("FFMPEG_PATH", "ffmpeg")
 

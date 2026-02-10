@@ -1,7 +1,7 @@
 import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import uploads, jobs
+from routers import uploads, jobs, narrative
 
 app = FastAPI(title="RESPLAT Video Generator")
 
@@ -21,6 +21,7 @@ app.add_middleware(
 
 app.include_router(uploads.router, prefix="/api")
 app.include_router(jobs.router, prefix="/api")
+app.include_router(narrative.router, prefix="/api")
 
 
 @app.get("/api/health")
