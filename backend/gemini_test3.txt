@@ -1,0 +1,215 @@
+﻿python : C:\Users\CHECK\AppData
+\Local\Programs\Python\Python31
+1\Lib\site-packages\pydantic\_i
+nternal\_fields.py:184: UserWar
+ning: Field name "name" shadows
+ an attribute in parent "Operat
+ion"; 
+위치 줄:1 문자:1
++ python -c "from google import
+ genai; c = genai.Client(api_ke
+y='AIzaSy ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~
+    + CategoryInfo          : N
+otSpeci    fied: (C:\Users\CHEC
+K\...t "Operat    ion"; :String
+) [], RemoteException
+    + FullyQualifiedErrorId : N
+ativeCo    mmandError
+ 
+  warnings.warn(
+C:\Users\CHECK\AppData\Local\Pr
+ograms\Python\Python311\Lib\sit
+e-packages\pydantic\_internal\_
+fields.py:184: UserWarning: Fie
+ld name "metadata" shadows an a
+ttribute in parent "Operation";
+ 
+  warnings.warn(
+C:\Users\CHECK\AppData\Local\Pr
+ograms\Python\Python311\Lib\sit
+e-packages\pydantic\_internal\_
+fields.py:184: UserWarning: Fie
+ld name "done" shadows an attri
+bute in parent "Operation"; 
+  warnings.warn(
+C:\Users\CHECK\AppData\Local\Pr
+ograms\Python\Python311\Lib\sit
+e-packages\pydantic\_internal\_
+fields.py:184: UserWarning: Fie
+ld name "error" shadows an attr
+ibute in parent "Operation"; 
+  warnings.warn(
+Traceback (most recent call las
+t):
+  File "<string>", line 1, in <
+module>
+  File "C:\Users\CHECK\AppData\
+Local\Programs\Python\Python311
+\Lib\site-packages\google\genai
+\models.py", line 5835, in gene
+rate_content
+    response = self._generate_c
+ontent(
+               ^^^^^^^^^^^^^^^^
+^^^^^^^
+  File "C:\Users\CHECK\AppData\
+Local\Programs\Python\Python311
+\Lib\site-packages\google\genai
+\models.py", line 4761, in _gen
+erate_content
+    response = self._api_client
+.request(
+               ^^^^^^^^^^^^^^^^
+^^^^^^^^^
+  File "C:\Users\CHECK\AppData\
+Local\Programs\Python\Python311
+\Lib\site-packages\google\genai
+\_api_client.py", line 1177, in
+ request
+    response = self._request(ht
+tp_request, http_options, strea
+m=False)
+               ^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^
+  File "C:\Users\CHECK\AppData\
+Local\Programs\Python\Python311
+\Lib\site-packages\google\genai
+\_api_client.py", line 997, in 
+_request
+    return self._retry(self._re
+quest_once, http_request, strea
+m)  # type: ignore[no-any-retur
+n]
+           ^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^
+  File "C:\Users\CHECK\AppData\
+Local\Programs\Python\Python311
+\Lib\site-packages\tenacity\__i
+nit__.py", line 475, in __call_
+_
+    do = self.iter(retry_state=
+retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^
+  File "C:\Users\CHECK\AppData\
+Local\Programs\Python\Python311
+\Lib\site-packages\tenacity\__i
+nit__.py", line 376, in iter
+    result = action(retry_state
+)
+             ^^^^^^^^^^^^^^^^^^
+^
+  File "C:\Users\CHECK\AppData\
+Local\Programs\Python\Python311
+\Lib\site-packages\tenacity\__i
+nit__.py", line 418, in exc_che
+ck
+    raise retry_exc.reraise()
+          ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CHECK\AppData\
+Local\Programs\Python\Python311
+\Lib\site-packages\tenacity\__i
+nit__.py", line 185, in reraise
+    raise self.last_attempt.res
+ult()
+          ^^^^^^^^^^^^^^^^^^^^^
+^^^^^
+  File "C:\Users\CHECK\AppData\
+Local\Programs\Python\Python311
+\Lib\concurrent\futures\_base.p
+y", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CHECK\AppData\
+Local\Programs\Python\Python311
+\Lib\concurrent\futures\_base.p
+y", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\CHECK\AppData\
+Local\Programs\Python\Python311
+\Lib\site-packages\tenacity\__i
+nit__.py", line 478, in __call_
+_
+    result = fn(*args, **kwargs
+)
+             ^^^^^^^^^^^^^^^^^^
+^
+  File "C:\Users\CHECK\AppData\
+Local\Programs\Python\Python311
+\Lib\site-packages\google\genai
+\_api_client.py", line 974, in 
+_request_once
+    errors.APIError.raise_for_r
+esponse(response)
+  File "C:\Users\CHECK\AppData\
+Local\Programs\Python\Python311
+\Lib\site-packages\google\genai
+\errors.py", line 105, in raise
+_for_response
+    raise ClientError(status_co
+de, response_json, response)
+google.genai.errors.ClientError
+: 429 RESOURCE_EXHAUSTED. {'err
+or': {'code': 429, 'message': '
+You exceeded your current quota
+, please check your plan and bi
+lling details. For more informa
+tion on this error, head to: ht
+tps://ai.google.dev/gemini-api/
+docs/rate-limits. To monitor yo
+ur current usage, head to: http
+s://ai.dev/rate-limit. \n* Quot
+a exceeded for metric: generati
+velanguage.googleapis.com/gener
+ate_content_free_tier_requests,
+ limit: 0, model: gemini-2.0-fl
+ash\n* Quota exceeded for metri
+c: generativelanguage.googleapi
+s.com/generate_content_free_tie
+r_requests, limit: 0, model: ge
+mini-2.0-flash\n* Quota exceede
+d for metric: generativelanguag
+e.googleapis.com/generate_conte
+nt_free_tier_input_token_count,
+ limit: 0, model: gemini-2.0-fl
+ash\nPlease retry in 7.46108301
+8s.', 'status': 'RESOURCE_EXHAU
+STED', 'details': [{'@type': 't
+ype.googleapis.com/google.rpc.H
+elp', 'links': [{'description':
+ 'Learn more about Gemini API q
+uotas', 'url': 'https://ai.goog
+le.dev/gemini-api/docs/rate-lim
+its'}]}, {'@type': 'type.google
+apis.com/google.rpc.QuotaFailur
+e', 'violations': [{'quotaMetri
+c': 'generativelanguage.googlea
+pis.com/generate_content_free_t
+ier_requests', 'quotaId': 'Gene
+rateRequestsPerDayPerProjectPer
+Model-FreeTier', 'quotaDimensio
+ns': {'location': 'global', 'mo
+del': 'gemini-2.0-flash'}}, {'q
+uotaMetric': 'generativelanguag
+e.googleapis.com/generate_conte
+nt_free_tier_requests', 'quotaI
+d': 'GenerateRequestsPerMinuteP
+erProjectPerModel-FreeTier', 'q
+uotaDimensions': {'location': '
+global', 'model': 'gemini-2.0-f
+lash'}}, {'quotaMetric': 'gener
+ativelanguage.googleapis.com/ge
+nerate_content_free_tier_input_
+token_count', 'quotaId': 'Gener
+ateContentInputTokensPerModelPe
+rMinute-FreeTier', 'quotaDimens
+ions': {'model': 'gemini-2.0-fl
+ash', 'location': 'global'}}]},
+ {'@type': 'type.googleapis.com
+/google.rpc.RetryInfo', 'retryD
+elay': '7s'}]}}

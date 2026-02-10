@@ -1,5 +1,5 @@
 """
-LLM-based narrative generation service using Google Gemini API.
+LLM-based narrative generation service using Groq API (LLaMA 3.2 Vision).
 
 Analyzes uploaded images to auto-generate cinematic narratives,
 and merges them with user-provided narratives.
@@ -8,26 +8,26 @@ and merges them with user-provided narratives.
 import base64
 from pathlib import Path
 
-from google import genai
-from google.genai import types
-from config import GEMINI_API_KEY
+from groq import Groq
+from config import GROQ_API_KEY
 
 _client = None
-MODEL = "gemini-2.0-flash"
+MODEL = "meta-llama/llama-4-scout-17b-16e-instruct"
 
 
-def _get_client() -> genai.Client:
+def _get_client() -> Groq:
     global _client
     if _client is None:
-        if not GEMINI_API_KEY:
-            raise ValueError("GEMINI_API_KEY is not set. Add it to backend/.env")
-        _client = genai.Client(api_key=GEMINI_API_KEY)
+        if not GROQ_API_KEY:
+            raise ValueError("GROQ_API_KEY is not set. Add it to backend/.env")
+        _client = Groq(api_key=GROQ_API_KEY)
     return _client
 
 
-def _load_image_part(image_path: Path) -> types.Part:
-    """Load an image file and return a Gemini Part."""
+def _encode_image(image_path: Path) -> tuple[str, str]:
+    """Read image and return (base64_data, mime_type)."""
     data = image_path.read_bytes()
+    b64 = base64.b64encode(data).decode("utf-8")
     suffix = image_path.suffix.lower()
     mime_map = {
         ".jpg": "image/jpeg",
@@ -37,32 +37,41 @@ def _load_image_part(image_path: Path) -> types.Part:
         ".gif": "image/gif",
     }
     mime = mime_map.get(suffix, "image/jpeg")
-    return types.Part.from_bytes(data=data, mime_type=mime)
+    return b64, mime
 
 
 async def analyze_images(image_paths: list[Path]) -> str:
     """Analyze images and generate a cinematic narrative in Korean."""
-    parts: list[types.Part] = []
+    content = []
     for p in image_paths:
-        parts.append(_load_image_part(p))
+        b64, mime = _encode_image(p)
+        content.append({
+            "type": "image_url",
+            "image_url": {"url": f"data:{mime};base64,{b64}"},
+        })
 
-    parts.append(types.Part.from_text(
-        "당신은 시네마틱 영상의 내레이션 작가입니다.\n"
-        "위 이미지들을 순서대로 분석하여, 10초짜리 시네마틱 영상에 어울리는 "
-        "감성적이고 짧은 서사(내레이션)를 한국어로 작성해주세요.\n\n"
-        "규칙:\n"
-        "- 이미지 수에 맞춰 문장을 나누세요 (각 이미지당 1~2문장)\n"
-        "- 전체적으로 하나의 이야기로 연결되어야 합니다\n"
-        "- 시적이고 영화적인 톤으로 작성하세요\n"
-        "- 총 길이는 3~6문장으로 짧게 유지하세요\n"
-        "- 서사 텍스트만 출력하세요 (설명이나 부연 없이)"
-    ))
+    content.append({
+        "type": "text",
+        "text": (
+            "당신은 시네마틱 영상의 내레이션 작가입니다.\n"
+            "위 이미지들을 순서대로 분석하여, 10초짜리 시네마틱 영상에 어울리는 "
+            "감성적이고 짧은 서사(내레이션)를 한국어로 작성해주세요.\n\n"
+            "규칙:\n"
+            "- 이미지 수에 맞춰 문장을 나누세요 (각 이미지당 1~2문장)\n"
+            "- 전체적으로 하나의 이야기로 연결되어야 합니다\n"
+            "- 시적이고 영화적인 톤으로 작성하세요\n"
+            "- 총 길이는 3~6문장으로 짧게 유지하세요\n"
+            "- 서사 텍스트만 출력하세요 (설명이나 부연 없이)"
+        ),
+    })
 
-    response = _get_client().models.generate_content(
+    response = _get_client().chat.completions.create(
         model=MODEL,
-        contents=[types.Content(role="user", parts=parts)],
+        messages=[{"role": "user", "content": content}],
+        temperature=0.7,
+        max_tokens=500,
     )
-    return response.text.strip()
+    return response.choices[0].message.content.strip()
 
 
 async def merge_narratives(ai_narrative: str, user_narrative: str) -> str:
@@ -81,11 +90,13 @@ async def merge_narratives(ai_narrative: str, user_narrative: str) -> str:
         "- 결합된 서사 텍스트만 출력하세요 (설명이나 부연 없이)"
     )
 
-    response = _get_client().models.generate_content(
-        model=MODEL,
-        contents=prompt,
+    response = _get_client().chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0.7,
+        max_tokens=500,
     )
-    return response.text.strip()
+    return response.choices[0].message.content.strip()
 
 
 async def generate_narrative(

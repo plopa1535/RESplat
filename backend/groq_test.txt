@@ -1,0 +1,54 @@
+﻿python : Traceback (most recent
+ call last):
+위치 줄:1 문자:1
++ python -c "from groq import G
+roq; c = Groq(api_key='gsk_dCZU
+Vb6oVv7yF ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~
+    + CategoryInfo          :  
+   NotSpecified: (Traceback (  
+  most recent call last)::St   
+ ring) [], RemoteException
+    + FullyQualifiedErrorId :  
+   NativeCommandError
+ 
+  File "<string>", line 1, in <
+module>
+  File "C:\Users\CHECK\AppData\
+Local\Programs\Python\Python311
+\Lib\site-packages\groq\resourc
+es\chat\completions.py", line 4
+61, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "C:\Users\CHECK\AppData\
+Local\Programs\Python\Python311
+\Lib\site-packages\groq\_base_c
+lient.py", line 1242, in post
+    return cast(ResponseT, self
+.request(cast_to, opts, stream=
+stream, stream_cls=stream_cls))
+                           ^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CHECK\AppData\
+Local\Programs\Python\Python311
+\Lib\site-packages\groq\_base_c
+lient.py", line 1044, in reques
+t
+    raise self._make_status_err
+or_from_response(err.response) 
+from None
+groq.BadRequestError: Error cod
+e: 400 - {'error': {'message': 
+'The model `llama-3.2-90b-visio
+n-preview` has been decommissio
+ned and is no longer supported.
+ Please refer to https://consol
+e.groq.com/docs/deprecations fo
+r a recommendation on which mod
+el to use instead.', 'type': 'i
+nvalid_request_error', 'code': 
+'model_decommissioned'}}
